@@ -29,7 +29,11 @@ export function initAnalytics() {
         maskAllInputs: true,
         captureCanvas: { recordCanvas: true, canvasFps: 4, canvasQuality: '0.4' },
       },
-      loaded: (ph) => ph.startSessionRecording(true), // ignore sampling / linked-flag gates: record every visit
+      loaded: (ph) => {
+        // Shares a PostHog project with other sites: tag every event so ShredSafe can be filtered on its own
+        ph.register({ app: 'shredsafe' })
+        ph.startSessionRecording(true) // ignore sampling / linked-flag gates: record every visit
+      },
     })
     client = posthog
     for (const [event, props] of queue.splice(0)) posthog.capture(event, props)
