@@ -14,9 +14,9 @@
 ![DynamoDB](https://img.shields.io/badge/DynamoDB-4053d6?logo=amazondynamodb&logoColor=white)
 ![Tests](https://img.shields.io/badge/backend_tests-247_passing-2ea44f)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/aryanpatel142006/shredsafe)
+### [Live demo → shredsafe.vercel.app](https://shredsafe.vercel.app) &nbsp;·&nbsp; [Watch the 90-second tour](docs/media/shredsafe-demo.mp4)
 
-![ShredSafe home page: a 3D shredder clearing a file past its retention date](docs/images/home.jpg)
+[![ShredSafe: a 3D shredder clears a file past its retention date, then the audit log catches a tampered entry](docs/media/shredsafe-preview.gif)](https://shredsafe.vercel.app)
 
 </div>
 
@@ -151,7 +151,11 @@ sensitive-data scan, approve and restore files, place legal holds, tamper with t
 
 ### Deploy the demo to Vercel
 
-Click **Deploy with Vercel** above, or import the repo at [vercel.com/new](https://vercel.com/new) and keep the
+The hosted demo is at **[shredsafe.vercel.app](https://shredsafe.vercel.app)**. To deploy your own copy:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/aryanpatel142006/shredsafe&root-directory=frontend)
+
+or import the repo at [vercel.com/new](https://vercel.com/new), set the Root Directory to `frontend`, and keep the
 defaults. [`vercel.json`](vercel.json) already sets the build (`frontend/`), the output folder and the rewrite that lets
 deep links like `/queue` load directly.
 
