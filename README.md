@@ -1,24 +1,52 @@
 <div align="center">
 
-# ShredSafe
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/logo-dark.svg">
+  <img src="docs/images/logo-light.svg" width="300" alt="ShredSafe">
+</picture>
 
-**Defensible disposal for broker-dealer and advisory records: classify every file against SEC 17a-4 / FINRA 4511 retention rules, delete only what the rules allow, and prove it with a tamper-evident ledger.**
+<h3>Delete only the records the rules allow, and prove it.</h3>
 
-![React](https://img.shields.io/badge/React_19-20232a?logo=react&logoColor=61dafb)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?logo=typescript&logoColor=white)
-![three.js](https://img.shields.io/badge/three.js-000000?logo=threedotjs&logoColor=white)
-![Python](https://img.shields.io/badge/Python_3.11-3776ab?logo=python&logoColor=white)
-![AWS Lambda](https://img.shields.io/badge/AWS_Lambda-ff9900?logo=awslambda&logoColor=white)
-![Amazon Bedrock](https://img.shields.io/badge/Amazon_Bedrock-01a88d?logo=amazonaws&logoColor=white)
-![Amazon Macie](https://img.shields.io/badge/Amazon_Macie-8c4fff?logo=amazonaws&logoColor=white)
-![DynamoDB](https://img.shields.io/badge/DynamoDB-4053d6?logo=amazondynamodb&logoColor=white)
-![Tests](https://img.shields.io/badge/backend_tests-247_passing-2ea44f)
+<p>Retention-aware file disposal for broker-dealers and financial advisors:<br>
+AI classification, SEC 17a-4 / FINRA retention rules, and a tamper-evident audit ledger, on AWS.</p>
 
-### [Live demo → shredsafe.vercel.app](https://shredsafe.vercel.app) &nbsp;·&nbsp; [Watch the 1-minute tour](docs/media/shredsafe-demo.mp4)
+<p>
+<a href="https://shredsafe.vercel.app"><img src="https://img.shields.io/badge/Live_demo-shredsafe.vercel.app-0d1117?style=for-the-badge&labelColor=ffffff&color=0d1117" alt="Live demo"></a>
+&nbsp;
+<a href="docs/media/shredsafe-demo.mp4"><img src="https://img.shields.io/badge/Watch_the_tour-1_minute-0d1117?style=for-the-badge&labelColor=ffffff&color=0d1117" alt="Watch the 1-minute tour"></a>
+</p>
 
-<a href="https://shredsafe.vercel.app"><img src="docs/media/shredsafe-preview.gif" width="820" alt="ShredSafe: the home page story, then the audit log catching a tampered entry"></a>
+<p>
+<img src="https://img.shields.io/badge/React_19-20232a?style=flat-square&logo=react&logoColor=61dafb" alt="React 19">
+<img src="https://img.shields.io/badge/TypeScript-3178c6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
+<img src="https://img.shields.io/badge/three.js-000000?style=flat-square&logo=threedotjs&logoColor=white" alt="three.js">
+<img src="https://img.shields.io/badge/Python-3776ab?style=flat-square&logo=python&logoColor=white" alt="Python">
+<img src="https://img.shields.io/badge/AWS_Lambda-ff9900?style=flat-square&logo=awslambda&logoColor=white" alt="AWS Lambda">
+<img src="https://img.shields.io/badge/Bedrock-01a88d?style=flat-square&logo=amazonaws&logoColor=white" alt="Amazon Bedrock">
+<img src="https://img.shields.io/badge/Macie-8c4fff?style=flat-square&logo=amazonaws&logoColor=white" alt="Amazon Macie">
+<img src="https://img.shields.io/badge/DynamoDB-4053d6?style=flat-square&logo=amazondynamodb&logoColor=white" alt="DynamoDB">
+<img src="https://img.shields.io/badge/tests-247_passing-2ea44f?style=flat-square" alt="247 tests passing">
+</p>
+
+<br>
+
+<a href="https://shredsafe.vercel.app"><img src="docs/media/shredsafe-preview.gif" width="80%" alt="ShredSafe: the home page story, then the audit log catching a tampered entry"></a>
+
+<br><br>
+
+<sub>
+<a href="#the-problem">Problem</a> &nbsp;·&nbsp;
+<a href="#what-it-does">What it does</a> &nbsp;·&nbsp;
+<a href="#engineering-highlights">Engineering</a> &nbsp;·&nbsp;
+<a href="#screenshots">Screenshots</a> &nbsp;·&nbsp;
+<a href="#how-its-built-on-aws">AWS architecture</a> &nbsp;·&nbsp;
+<a href="#try-it">Run it</a> &nbsp;·&nbsp;
+<a href="#built-at-a-hackathon">Team</a>
+</sub>
 
 </div>
+
+<br>
 
 ## The problem
 
