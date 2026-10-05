@@ -11,9 +11,9 @@
 AI classification, SEC 17a-4 / FINRA retention rules, and a tamper-evident audit ledger, on AWS.</p>
 
 <p>
-<a href="https://shredsafe.vercel.app"><img src="https://img.shields.io/badge/Live_demo-shredsafe.vercel.app-0d1117?style=for-the-badge&labelColor=ffffff&color=0d1117" alt="Live demo"></a>
+<a href="https://shredsafe.vercel.app"><img src="https://img.shields.io/badge/%E2%96%B6%20%20Live%20demo-1f6feb?style=for-the-badge" alt="Live demo" height="36"></a>
 &nbsp;
-<a href="docs/media/shredsafe-demo.mp4"><img src="https://img.shields.io/badge/Watch_the_tour-1_minute-0d1117?style=for-the-badge&labelColor=ffffff&color=0d1117" alt="Watch the 1-minute tour"></a>
+<a href="docs/media/shredsafe-demo.mp4"><img src="https://img.shields.io/badge/Watch%20the%201--minute%20tour-57606a?style=for-the-badge" alt="Watch the 1-minute tour" height="36"></a>
 </p>
 
 <p>
@@ -28,11 +28,9 @@ AI classification, SEC 17a-4 / FINRA retention rules, and a tamper-evident audit
 <img src="https://img.shields.io/badge/tests-247_passing-2ea44f?style=flat-square" alt="247 tests passing">
 </p>
 
-<br>
-
 <a href="https://shredsafe.vercel.app"><img src="docs/media/shredsafe-preview.gif" width="80%" alt="ShredSafe: the home page story, then the audit log catching a tampered entry"></a>
 
-<br><br>
+<br>
 
 <sub>
 <a href="#the-problem">Problem</a> &nbsp;·&nbsp;
