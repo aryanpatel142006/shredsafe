@@ -54,7 +54,12 @@ export type ApiMode = 'mock' | 'live'
 const MODE_KEY = 'shredsafe.apiMode'
 const BASE_URL = (import.meta.env.VITE_API_URL ?? '').replace(/\/+$/, '')
 
+// A static deploy (e.g. the Vercel demo) has no backend: VITE_API_URL is unset, so the app always runs on
+// Sample data and the sidebar hides the Sample/Live switch.
+export const liveAvailable = Boolean(BASE_URL)
+
 export function getMode(): ApiMode {
+  if (!liveAvailable) return 'mock'
   try {
     const saved = localStorage.getItem(MODE_KEY)
     if (saved === 'mock' || saved === 'live') return saved

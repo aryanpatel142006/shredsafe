@@ -2,13 +2,16 @@
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-  justify-content: flex-end;
-  max-width: 460px;
+  align-items: center;
 }
 
+.audit-actions .btn {
+  white-space: nowrap;
+}
+
+/* Three actions don't fit beside the intro text, so they sit on their own row under it, in one line */
 .cert-blocked {
   flex-basis: 100%;
-  text-align: right;
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--danger);

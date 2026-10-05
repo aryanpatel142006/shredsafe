@@ -1,6 +1,6 @@
 import { Link, NavLink, Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom'
 import { usePageTitle } from './lib/title'
-import { mode, setMode, type ApiMode } from './api/client'
+import { liveAvailable, mode, setMode, type ApiMode } from './api/client'
 import { DEMO_ADVISOR } from './lib/format'
 import { signInEnabled } from './auth/config'
 import { RequireSignIn } from './auth/RequireSignIn'
@@ -61,22 +61,27 @@ function Sidebar() {
             <div className="muted">{DEMO_ADVISOR.branch}</div>
           </Link>
         )}
-        <div>
-          <div className="muted mode-label" id="mode-label" style={{ marginBottom: 6 }}>
-            Workspace data
+        {liveAvailable ? (
+          <div>
+            <div className="muted mode-label" id="mode-label" style={{ marginBottom: 6 }}>
+              Workspace data
+            </div>
+            <div className="mode-switch" role="group" aria-labelledby="mode-label">
+              <button type="button" aria-pressed={mode === 'mock'} onClick={() => choose('mock')}>
+                <span className="mode-dot" aria-hidden="true" />
+                Sample
+              </button>
+              <button type="button" aria-pressed={mode === 'live'} onClick={() => choose('live')}>
+                <span className="mode-dot" aria-hidden="true" />
+                Live
+              </button>
+            </div>
+            <p className="mode-now">{mode === 'live' ? 'Showing your files' : 'Showing sample files for a demo branch'}</p>
           </div>
-          <div className="mode-switch" role="group" aria-labelledby="mode-label">
-            <button type="button" aria-pressed={mode === 'mock'} onClick={() => choose('mock')}>
-              <span className="mode-dot" aria-hidden="true" />
-              Sample
-            </button>
-            <button type="button" aria-pressed={mode === 'live'} onClick={() => choose('live')}>
-              <span className="mode-dot" aria-hidden="true" />
-              Live
-            </button>
-          </div>
-          <p className="mode-now">{mode === 'live' ? 'Showing your files' : 'Showing sample files for a demo branch'}</p>
-        </div>
+        ) : (
+          // Static demo (no backend configured): sample data only, so no switch
+          <p className="mode-now">Demo workspace with sample files. Everything runs in your browser.</p>
+        )}
       </div>
     </aside>
   )
