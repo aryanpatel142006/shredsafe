@@ -1,4 +1,11 @@
-# How to run ShredSafe
+# Deploying the full backend to AWS
+
+> **Note:** this guide was written during the hackathon, when the team worked in an online VS Code that AWS
+> provided with credentials already set up. To deploy to **your own** AWS account instead:
+> install the [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html),
+> run `aws configure`, turn on Amazon Macie and request access to the **Amazon Nova Micro** model in the
+> Bedrock console (`us-east-1`), then clone this repo and follow the same steps below.
+> To run the website on its own computer (no AWS), see the main [README](../README.md).
 
 This guide walks you through getting ShredSafe running, from a fresh start to a working website you can sign in to.
 You'll do everything in the **online VS Code** the hackathon gave us. It already has access to our AWS account,
