@@ -2,7 +2,7 @@
 
 # ShredSafe
 
-**Defensible disposal for financial advisors: clear years of old client files off branch drives, without ever deleting one you're required to keep.**
+**Defensible disposal for broker-dealer and advisory records: classify every file against SEC 17a-4 / FINRA 4511 retention rules, delete only what the rules allow, and prove it with a tamper-evident ledger.**
 
 ![React](https://img.shields.io/badge/React_19-20232a?logo=react&logoColor=61dafb)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?logo=typescript&logoColor=white)
@@ -22,12 +22,12 @@
 
 ## The problem
 
-Every financial-advisor branch has a shared drive full of old files: account statements, trade confirmations, scanned
-IDs, draft financial plans, ten-year-old emails, the odd fantasy-football spreadsheet. Two rules pull in opposite
-directions:
+Every broker-dealer and advisory branch accumulates unstructured records: trade confirmations, account statements,
+scanned IDs, client correspondence, draft financial plans, ten-year-old emails, the odd fantasy-football spreadsheet.
+Two obligations pull in opposite directions:
 
-- **Some files must be kept.** SEC Rule 17a-4 and FINRA require broker-dealer records to be kept for 3 or 6 years, and
-  anything tied to a lawsuit or an exam (a *legal hold*) must be kept no matter how old it is.
+- **Some records must be kept.** SEC Rule 17a-4(b)/(c), FINRA Rule 4511 and Advisers Act Rule 204-2 set 3- and 6-year
+  retention periods, and anything tied to litigation or an exam (a *legal hold*) must be preserved however old it is.
 - **Everything else should be gone.** Past its retention date, a file full of Social Security numbers is pure breach
   risk. The amended SEC Regulation S-P (2024) requires firms to have written procedures for disposing of customer
   information.
@@ -52,6 +52,33 @@ the right files safe, fast and provable.
    integrity check fails at exactly that entry, and the certificate of disposal is blocked until it's resolved.
 
 ![The life of a file in ShredSafe](docs/images/file-lifecycle.svg)
+
+## Engineering highlights
+
+The parts that had to be *correct*, not just work:
+
+- **Tamper-evident ledger, safe under concurrency.** Each audit entry stores `SHA-256(prevHash + canonical JSON)`.
+  Appends use a DynamoDB conditional write on the sequence number (`attribute_not_exists(seq)`): when two writers race,
+  the loser re-reads the head and chains onto the winner, so the chain never forks. Reads are strongly consistent.
+  Verification recomputes the chain and reports the first entry that doesn't match.
+- **Invariants enforced on the server, not the client.** A record on legal hold, marked Retain, or inside its
+  retention period cannot be deleted whatever the client sends (HTTP 409). Every state change is a conditional update
+  on the expected current status, so two concurrent approvals can't both succeed. Bulk approval reports per-file
+  results instead of failing the batch.
+- **Regulation as tested code.** A rules engine maps each document type to its SEC 17a-4(b)/(c), FINRA 4511, Advisers
+  Act 204-2 and Reg S-P outcome and computes the exact keep-until date; legal holds (by client, account, branch or
+  keyword) override everything. Retained, high-exposure records move under S3 Object Lock (governance mode in this
+  build; compliance mode is the production setting for 17a-4(f) write-once storage).
+- **Fail safe, not fail open.** If classification is unsure, errors, or the file can't be read, the file becomes
+  *Review* and waits for a person; nothing is ever deleted by default. A warm worker caches classifier results by the
+  file's SHA-256, so an identical file isn't sent to the model twice.
+- **Tenant isolation.** Each firm is a workspace; every route filters through one visibility check, and another
+  firm's file returns 404 rather than 403 so IDs can't be probed. The uploader and workspace are signed into each
+  presigned S3 URL, so a browser can't upload into another firm. Sign-in tokens are verified (RS256, issuer,
+  audience, token use) on every request.
+- **Measured, not claimed.** 247 backend tests run against faked AWS services (moto). A 1,000-file load test is
+  written up with the limits it found (a 6 MB Lambda response caps one workspace at about 8–10k files) and the plan to
+  page past them; a million files is estimated at about half a day and under $50 of Bedrock + Macie.
 
 ## Screenshots
 
