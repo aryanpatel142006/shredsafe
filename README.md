@@ -16,7 +16,7 @@
 
 ### [Live demo → shredsafe.vercel.app](https://shredsafe.vercel.app) &nbsp;·&nbsp; [Watch the 1-minute tour](docs/media/shredsafe-demo.mp4)
 
-[![ShredSafe: a 3D shredder clears a file past its retention date, then the audit log catches a tampered entry](docs/media/shredsafe-preview.gif)](https://shredsafe.vercel.app)
+<a href="https://shredsafe.vercel.app"><img src="docs/media/shredsafe-preview.gif" width="820" alt="ShredSafe: the home page story, then the audit log catching a tampered entry"></a>
 
 </div>
 
