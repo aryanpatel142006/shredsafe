@@ -23,7 +23,6 @@ export function initAnalytics() {
       ui_host: 'https://us.posthog.com', // links back to the PostHog app work behind the proxy
       capture_pageview: 'history_change', // React Router navigations count as page views
       person_profiles: 'identified_only', // anonymous visitors only; no profiles are created
-      respect_dnt: true,
       // Session replay: on from the code, not only from the project setting. Inputs are masked; the 3D hero
       // is a WebGL canvas, which replays blank unless canvas capture is on.
       disable_session_recording: false,
