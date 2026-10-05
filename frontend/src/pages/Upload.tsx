@@ -5,6 +5,7 @@ import { formatBytes } from '../lib/format'
 import { scanEta } from '../lib/scanEstimate'
 import { useFiles } from '../state/files'
 import './upload.css'
+import { track } from '../lib/analytics'
 
 const CONCURRENCY = 4
 
@@ -97,6 +98,7 @@ export default function UploadPage() {
     }
     await Promise.all(Array.from({ length: Math.min(CONCURRENCY, fresh.length) }, worker))
     setRunning(false)
+    if (uploadedIds.length > 0) track('files_uploaded', { count: uploadedIds.length })
     void refresh()
     if (uploadedIds.length > 0) void scanAfterUpload(uploadedIds)
   }

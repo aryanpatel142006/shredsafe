@@ -7,6 +7,7 @@ import { useFiles } from '../state/files'
 import { useToast } from '../state/toast'
 import type { AuditEntry, VerifyResult } from '../types'
 import './audit.css'
+import { track } from '../lib/analytics'
 
 const ACTION_LABELS: Record<string, string> = {
   CLASSIFIED: 'Classified',
@@ -64,11 +65,13 @@ export default function AuditPage() {
   }, [load])
 
   async function recheck() {
+    track('integrity_check_run')
     const v = await load()
     if (v) toast(v.ok ? 'Integrity check passed.' : `Integrity check failed at entry ${v.brokenAtSeq}.`, v.ok ? 'ok' : 'error')
   }
 
   async function tamper() {
+    track('tamper_simulated')
     try {
       await api.tamper?.()
     } catch (e) {
@@ -89,6 +92,7 @@ export default function AuditPage() {
   // P3: the whole log as a spreadsheet for examiners. Built from what's on screen, so it needs no new route.
   function exportCsv() {
     if (!entries?.length) return
+    track('audit_csv_exported', { entries: entries.length })
     const cell = (v: unknown) => {
       const text = v == null ? '' : String(v)
       // Quote everything; neutralise leading = + - @ so a spreadsheet never runs a cell as a formula.
@@ -119,6 +123,7 @@ export default function AuditPage() {
   }
 
   async function downloadCertificate() {
+    track('certificate_downloaded')
     setDownloading(true)
     try {
       const blob = await api.certificate()

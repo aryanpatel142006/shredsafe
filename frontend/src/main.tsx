@@ -14,6 +14,7 @@ import './index.css'
 import App from './App'
 import { signInEnabled } from './auth/config'
 import { SessionProvider } from './auth/session'
+import { initAnalytics } from './lib/analytics'
 
 // Behind the online VS Code proxy the app lives under /ports/<port>. Read the prefix from the address
 // itself, so a build served on another port (5174) still renders; a build made by `npm run online`
@@ -23,6 +24,8 @@ const routerBase =
   window.location.pathname.match(/^\/ports\/\d+/)?.[0] ||
   (import.meta.env.VITE_ROUTER_BASE ?? '').replace(/\/+$/, '') ||
   undefined
+
+initAnalytics()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

@@ -10,6 +10,7 @@ import { scanEta } from '../lib/scanEstimate'
 import type { FileRecord, FileStatus, ScanState } from '../types'
 import { canApprove, docTypeLabel, fileName, formatBytes, formatDate, isOnHold, sortByPriority } from '../lib/format'
 import './queue.css'
+import { track } from '../lib/analytics'
 
 type Filter = FileStatus | 'ALL'
 
@@ -240,6 +241,7 @@ export default function QueuePage() {
         return
       }
       await api.startScan()
+      track('scan_started', { files: files.length })
       setRunningScanStartedAt(new Date().toISOString())
       setScanState('RUNNING')
     } catch (e) {
@@ -263,6 +265,8 @@ export default function QueuePage() {
       if (!run) return
       const updated = await run(f.fileId)
       upsert([updated])
+      if (action === 'approve') track('file_approved')
+      else if (action === 'reject') track('file_kept')
       const name = fileName(f)
       toast(
         action === 'approve'
@@ -298,6 +302,7 @@ export default function QueuePage() {
       }
       upsert(approved)
       setSelected(new Set())
+      track('files_bulk_approved', { approved: approved.length, blocked: blocked.length })
       const bytes = approved.reduce((s, f) => s + (f.sizeBytes ?? 0), 0)
       if (approved.length) {
         toast(`Approved ${approved.length} files (${formatBytes(bytes)}). They're in the grace period now.`)
