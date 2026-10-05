@@ -11,3 +11,5 @@ ShredSafe-frontend.pdf
 
 # SAM build output (sam build)
 .aws-sam/
+.vercel
+.env*.local

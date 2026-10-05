@@ -7,6 +7,7 @@ import type { PostHog } from 'posthog-js'
 import { mode } from '../api/client'
 
 const key = import.meta.env.VITE_POSTHOG_KEY as string | undefined
+// '/ingest' on Vercel: vercel.json proxies it to PostHog, so ad blockers that block posthog.com don't drop visits
 const host = (import.meta.env.VITE_POSTHOG_HOST as string | undefined) || 'https://us.i.posthog.com'
 
 export const analyticsOn = Boolean(key) && mode === 'mock'
@@ -19,6 +20,7 @@ export function initAnalytics() {
   void import('posthog-js').then(({ default: posthog }) => {
     posthog.init(key!, {
       api_host: host,
+      ui_host: 'https://us.posthog.com', // links back to the PostHog app work behind the proxy
       capture_pageview: 'history_change', // React Router navigations count as page views
       person_profiles: 'identified_only', // anonymous visitors only; no profiles are created
       respect_dnt: true,
@@ -32,7 +34,9 @@ export function initAnalytics() {
       loaded: (ph) => {
         // Shares a PostHog project with other sites: tag every event so ShredSafe can be filtered on its own
         ph.register({ app: 'shredsafe' })
-        ph.startSessionRecording(true) // ignore sampling / linked-flag gates: record every visit
+        // Record every visit: the shared project only auto-starts replays on URL triggers for another site, so
+        // override the URL trigger as well as sampling and the linked flag.
+        ph.startSessionRecording({ sampling: true, linked_flag: true, url_trigger: true })
       },
     })
     client = posthog
