@@ -14,7 +14,7 @@
 ![DynamoDB](https://img.shields.io/badge/DynamoDB-4053d6?logo=amazondynamodb&logoColor=white)
 ![Tests](https://img.shields.io/badge/backend_tests-247_passing-2ea44f)
 
-### [Live demo → shredsafe.vercel.app](https://shredsafe.vercel.app) &nbsp;·&nbsp; [Watch the 90-second tour](docs/media/shredsafe-demo.mp4)
+### [Live demo → shredsafe.vercel.app](https://shredsafe.vercel.app) &nbsp;·&nbsp; [Watch the 1-minute tour](docs/media/shredsafe-demo.mp4)
 
 [![ShredSafe: a 3D shredder clears a file past its retention date, then the audit log catches a tampered entry](docs/media/shredsafe-preview.gif)](https://shredsafe.vercel.app)
 
