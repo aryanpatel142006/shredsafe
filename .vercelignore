@@ -1,0 +1,7 @@
+# Only the website is deployed to Vercel (demo mode). The backend runs on AWS Lambda
+# (see docs/deploy-aws.md), so keep it out of the Vercel build.
+backend/
+infra/
+scripts/
+data/
+config/
