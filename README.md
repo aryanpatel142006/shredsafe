@@ -30,8 +30,6 @@ AI classification, SEC 17a-4 / FINRA retention rules, and a tamper-evident audit
 
 <a href="https://shredsafe.vercel.app"><img src="docs/media/shredsafe-preview.gif" width="80%" alt="ShredSafe: the home page story, then the audit log catching a tampered entry"></a>
 
-<br>
-
 <sub>
 <a href="#the-problem">Problem</a> &nbsp;·&nbsp;
 <a href="#what-it-does">What it does</a> &nbsp;·&nbsp;
